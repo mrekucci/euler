@@ -10,6 +10,6 @@ func TestAssertEquals(t *testing.T) {
 	v := 1
 	AssertEquals(t, v, v)
 	if t.Failed() {
-		t.Errorf("AssertEquals(t, %d, %d) fails, want %d equals %d", v, v, v, v)
+		t.Errorf("AssertEquals(t, %d, %d) fails; want %d equals %d", v, v, v, v)
 	}
 }
