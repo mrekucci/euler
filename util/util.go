@@ -38,6 +38,7 @@ func IsPrime(n int) bool {
 	case n%3 == 0:
 		return false
 	}
+
 	// Any number 'n' can have only one prime factor greater than sqrt of 'n'.
 	// And if 'n' is prime, so that prime factor is 'n' by its self.
 	l := int(math.Sqrt(float64(n)))
