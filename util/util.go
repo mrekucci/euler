@@ -5,8 +5,15 @@
 package util
 
 import (
+	"fmt"
 	"math"
 	"testing"
+)
+
+// Integer limit values.
+const (
+	MaxInt = int(^uint(0) >> 1)
+	MinInt = -MaxInt - 1
 )
 
 // AssertEquals fails by Errorf if res != want.
@@ -48,4 +55,47 @@ func IsPrime(n int) bool {
 		}
 	}
 	return true
+}
+
+// Mul returns result of a * b, and true when multiplication
+// doesn't overflow, otherwise return 0 and false.
+func Mul(a, b int) (int, bool) {
+	switch {
+	case a == 0 || b == 0:
+		return 0, true
+	case a == 1:
+		return b, true
+	case b == 1:
+		return a, true
+	// Next check involve the following cases:
+	// If a=MinInt then a*b overflows for every -1<b>1.
+	// If b=MinInt then b*a overflows for every -1<a>1.
+	// If a=MinInt and b=-1 then c=a*b overflows with result c=MinInt, this causes
+	// the division c/b to overflow (c/b=MinInt) and thus c/b=a which isn't really true.
+	case a == MinInt || b == MinInt:
+		return 0, false
+	default:
+		c := a * b
+		if c/b != a {
+			return 0, false
+		}
+		return c, true
+	}
+}
+
+// MulInts returns a number which is multiplication of integers in slice s.
+// A 0 and error is returned when multiplication overflows integer limits.
+func MulInts(s []int) (int, error) {
+	if len(s) == 0 {
+		return 0, nil
+	}
+	res := 1
+	for i, n := range s {
+		m, ok := Mul(res, n)
+		if !ok {
+			return 0, fmt.Errorf("util.MulInts: multiplication overflows at index %d on %d", i, s)
+		}
+		res = m
+	}
+	return res, nil
 }

@@ -4,7 +4,10 @@
 
 package util
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestAssertEquals(t *testing.T) {
 	v := 1
@@ -50,8 +53,76 @@ func TestIsPrime(t *testing.T) {
 	}
 }
 
+var mulTests = []struct {
+	a   int
+	b   int
+	out int
+	ok  bool
+}{
+	{MinInt, 0, 0, true},
+	{0, MinInt, 0, true},
+	{MinInt, 1, MinInt, true},
+	{1, MinInt, MinInt, true},
+	{MaxInt, -1, -MaxInt, true},
+	{-1, MaxInt, -MaxInt, true},
+	{-MaxInt, -1, MaxInt, true},
+	{-1, -MaxInt, MaxInt, true},
+	{MinInt, 2, 0, false},
+	{MinInt, -2, 0, false},
+	{MinInt, -1, 0, false},
+	{2, MinInt, 0, false},
+	{-2, MinInt, 0, false},
+	{-1, MinInt, 0, false},
+}
+
+func TestMul(t *testing.T) {
+	for _, tt := range mulTests {
+		got, ok := Mul(tt.a, tt.b)
+		if got != tt.out || ok != tt.ok {
+			t.Errorf("Mul(%d, %d) = %d, %t; want %d, %t", tt.a, tt.b, got, ok, tt.out, tt.ok)
+		}
+	}
+}
+
+var mulIntsTests = []struct {
+	in  []int
+	out int
+	err error
+}{
+	{[]int{-2, 3, 4}, -24, nil},
+	{[]int{-3, -4, 5}, 60, nil},
+	{[]int{-4, -5, -6}, -120, nil},
+	{[]int{0, 0, 0}, 0, nil},
+	{[]int{2, 3, 4}, 24, nil},
+	{[]int{3, 4, 5}, 60, nil},
+	{[]int{4, 5, 6}, 120, nil},
+}
+
+func TestMulInts(t *testing.T) {
+	for _, tt := range mulIntsTests {
+		got, err := MulInts(tt.in)
+		if got != tt.out || !reflect.DeepEqual(err, tt.err) {
+			t.Errorf("MulInts(%d) = %d, %v; want %d, %v", tt.in, got, err, tt.out, tt.err)
+		}
+	}
+}
+
 func BenchmarkIsPrime(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		IsPrime(i)
+	}
+}
+
+func BenchmarkMulInts(b *testing.B) {
+	ints := make([]int, 1e3)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		MulInts(ints)
+	}
+}
+
+func BenchmarkMul(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Mul(i, i)
 	}
 }
