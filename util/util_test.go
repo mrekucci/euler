@@ -4,9 +4,11 @@
 
 package util
 
-import (
-	"reflect"
-	"testing"
+import "testing"
+
+const (
+	noError  = true
+	hasError = false
 )
 
 func TestAssertEquals(t *testing.T) {
@@ -87,22 +89,36 @@ func TestMul(t *testing.T) {
 var mulIntsTests = []struct {
 	in  []int
 	out int
-	err error
+	ok  bool
 }{
-	{[]int{-2, 3, 4}, -24, nil},
-	{[]int{-3, -4, 5}, 60, nil},
-	{[]int{-4, -5, -6}, -120, nil},
-	{[]int{0, 0, 0}, 0, nil},
-	{[]int{2, 3, 4}, 24, nil},
-	{[]int{3, 4, 5}, 60, nil},
-	{[]int{4, 5, 6}, 120, nil},
+	{[]int{-2, 3, 4}, -24, noError},
+	{[]int{-3, -4, 5}, 60, noError},
+	{[]int{-4, -5, -6}, -120, noError},
+	{[]int{0, 0, 0}, 0, noError},
+	{[]int{2, 3, 4}, 24, noError},
+	{[]int{3, 4, 5}, 60, noError},
+	{[]int{4, 5, 6}, 120, noError},
+	{[]int{MinInt, 2}, 0, hasError},
+	{[]int{MinInt, -2}, 0, hasError},
+	{[]int{MinInt, -1}, 0, hasError},
+	{[]int{2, MinInt}, 0, hasError},
+	{[]int{-2, MinInt}, 0, hasError},
+	{[]int{-1, MinInt}, 0, hasError},
 }
 
 func TestMulInts(t *testing.T) {
 	for _, tt := range mulIntsTests {
 		got, err := MulInts(tt.in)
-		if got != tt.out || !reflect.DeepEqual(err, tt.err) {
-			t.Errorf("MulInts(%d) = %d, %v; want %d, %v", tt.in, got, err, tt.out, tt.err)
+		switch {
+		case got != tt.out && tt.ok:
+			t.Errorf("MulInts(%d) = %d, %v; want %d, <nil>", tt.in, got, err, tt.out)
+			continue
+		case err == nil && !tt.ok:
+			t.Errorf("MulInts(%d) = %d, %v; expected error, got none", tt.in, got, err)
+			continue
+		case err != nil && tt.ok:
+			t.Errorf("MulInts(%d) = %d, %v; unexpected error: %v", tt.in, got, err, err)
+			continue
 		}
 	}
 }
