@@ -4,14 +4,14 @@
 
 package problem008
 
-import (
-	"testing"
-
-	"github.com/mrekucci/euler/util"
-)
+import "testing"
 
 func TestSolution(t *testing.T) {
-	util.AssertEquals(t, Solution(), 23514624000)
+	want := 23514624000
+	got, err := Solution()
+	if got != want || err != nil {
+		t.Errorf("Solution = %d, %v; want %d, %v", got, err, want, nil)
+	}
 }
 
 func BenchmarkSolution(b *testing.B) {

@@ -4,11 +4,14 @@
 
 package problem008
 
-import "github.com/mrekucci/euler/util"
+import (
+	"fmt"
+	"github.com/mrekucci/euler/util"
+)
 
 // Solution for finding the thirteen adjacent digits in
 // the 1000-digit number that have the greatest product.
-func Solution() int {
+func Solution() (int, error) {
 	const count = 13
 	const bigNum = "73167176531330624919225119674426574742355349194934" +
 		"96983520312774506326239578318016984801869478851843" +
@@ -35,13 +38,13 @@ func Solution() int {
 	adjDigs := make([]int, count)
 	for i, n := range bigNum {
 		adjDigs[i%count] = int(n - '0') // i%count is a ring buffer.
-		gpc, err := util.MulInts(adjDigs)
-		if err != nil {
-			panic(err)
+		gpc, ok := util.MulInts(adjDigs)
+		if !ok {
+			return 0, fmt.Errorf("multiplication overflows on %d", adjDigs)
 		}
 		if gpc > gp {
 			gp = gpc
 		}
 	}
-	return gp
+	return gp, nil
 }

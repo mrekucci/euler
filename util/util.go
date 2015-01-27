@@ -5,7 +5,6 @@
 package util
 
 import (
-	"fmt"
 	"math"
 	"testing"
 )
@@ -85,18 +84,18 @@ func Mul(a, b int) (int, bool) {
 }
 
 // MulInts returns a number which is multiplication of integers in slice s.
-// A 0 and error is returned when multiplication overflows integer limits.
-func MulInts(s []int) (int, error) {
+// A 0 and false is returned when multiplication overflows integer limits.
+func MulInts(s []int) (int, bool) {
 	if len(s) == 0 {
-		return 0, nil
+		return 0, true
 	}
 	res := 1
-	for i, n := range s {
+	for _, n := range s {
 		m, ok := Mul(res, n)
 		if !ok {
-			return 0, fmt.Errorf("util.MulInts: multiplication overflows at index %d on %d", i, s)
+			return 0, false
 		}
 		res = m
 	}
-	return res, nil
+	return res, true
 }

@@ -6,11 +6,6 @@ package util
 
 import "testing"
 
-const (
-	noError  = true
-	hasError = false
-)
-
 func TestAssertEquals(t *testing.T) {
 	v := 1
 	AssertEquals(t, v, v)
@@ -91,34 +86,26 @@ var mulIntsTests = []struct {
 	out int
 	ok  bool
 }{
-	{[]int{-2, 3, 4}, -24, noError},
-	{[]int{-3, -4, 5}, 60, noError},
-	{[]int{-4, -5, -6}, -120, noError},
-	{[]int{0, 0, 0}, 0, noError},
-	{[]int{2, 3, 4}, 24, noError},
-	{[]int{3, 4, 5}, 60, noError},
-	{[]int{4, 5, 6}, 120, noError},
-	{[]int{MinInt, 2}, 0, hasError},
-	{[]int{MinInt, -2}, 0, hasError},
-	{[]int{MinInt, -1}, 0, hasError},
-	{[]int{2, MinInt}, 0, hasError},
-	{[]int{-2, MinInt}, 0, hasError},
-	{[]int{-1, MinInt}, 0, hasError},
+	{[]int{-2, 3, 4}, -24, true},
+	{[]int{-3, -4, 5}, 60, true},
+	{[]int{-4, -5, -6}, -120, true},
+	{[]int{0, 0, 0}, 0, true},
+	{[]int{2, 3, 4}, 24, true},
+	{[]int{3, 4, 5}, 60, true},
+	{[]int{4, 5, 6}, 120, true},
+	{[]int{MinInt, 2}, 0, false},
+	{[]int{MinInt, -2}, 0, false},
+	{[]int{MinInt, -1}, 0, false},
+	{[]int{2, MinInt}, 0, false},
+	{[]int{-2, MinInt}, 0, false},
+	{[]int{-1, MinInt}, 0, false},
 }
 
 func TestMulInts(t *testing.T) {
 	for _, tt := range mulIntsTests {
-		got, err := MulInts(tt.in)
-		switch {
-		case got != tt.out && tt.ok:
-			t.Errorf("MulInts(%d) = %d, %v; want %d, <nil>", tt.in, got, err, tt.out)
-			continue
-		case err == nil && !tt.ok:
-			t.Errorf("MulInts(%d) = %d, %v; expected error, got none", tt.in, got, err)
-			continue
-		case err != nil && tt.ok:
-			t.Errorf("MulInts(%d) = %d, %v; unexpected error: %v", tt.in, got, err, err)
-			continue
+		got, ok := MulInts(tt.in)
+		if got != tt.out || ok != tt.ok {
+			t.Errorf("MulInts(%d) = %d, %t; want %d, %t", tt.in, got, ok, tt.out, tt.ok)
 		}
 	}
 }
