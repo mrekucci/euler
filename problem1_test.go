@@ -2,16 +2,16 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package problem001
+package euler
 
-import (
-	"testing"
+import "testing"
 
-	"github.com/mrekucci/euler/util"
-)
-
-func TestSolution(t *testing.T) {
-	util.AssertEquals(t, Solution(), 233168)
+func TestProblem1(t *testing.T) {
+	want := 233168
+	got := Problem1()
+	if got != want {
+		t.Errorf("Problem1() = %d; want %d", got, want)
+	}
 }
 
 var snTests = []struct {
@@ -35,8 +35,8 @@ func TestSn(t *testing.T) {
 	}
 }
 
-func BenchmarkSolution(b *testing.B) {
+func BenchmarkProblem1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		Solution()
+		Problem1()
 	}
 }

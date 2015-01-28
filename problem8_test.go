@@ -2,20 +2,20 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package problem008
+package euler
 
 import "testing"
 
-func TestSolution(t *testing.T) {
+func TestProblem8(t *testing.T) {
 	want := 23514624000
-	got, err := Solution()
+	got, err := Problem8()
 	if got != want || err != nil {
-		t.Errorf("Solution = %d, %v; want %d, %v", got, err, want, nil)
+		t.Errorf("Problem8() = %d, %v; want %d, <nil>", got, err, want)
 	}
 }
 
-func BenchmarkSolution(b *testing.B) {
+func BenchmarkProblem8(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		Solution()
+		Problem8()
 	}
 }

@@ -2,11 +2,11 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package problem004
+package euler
 
-// Solution for finding the largest palindrome
+// Problem4 is solution for finding the largest palindrome
 // made from the product of two 3-digit numbers.
-func Solution() int {
+func Problem4() int {
 	lp := 0
 	// The palindrome can be written as: abccba which simplifies to:
 	// 100000a + 10000b + 1000c + 100c + 10b + 1a.

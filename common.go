@@ -2,26 +2,15 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package util
+package euler
 
-import (
-	"math"
-	"testing"
-)
+import "math"
 
 // Integer limit values.
 const (
 	MaxInt = int(^uint(0) >> 1)
 	MinInt = -MaxInt - 1
 )
-
-// AssertEquals fails by Errorf if res != want.
-// It helps reduce boilerplate code in tests.
-func AssertEquals(t *testing.T, res int, want int) {
-	if res != want {
-		t.Errorf("Result = %d; want %d", res, want)
-	}
-}
 
 // IsPrime returns true if number n is a prime number.
 func IsPrime(n int) bool {

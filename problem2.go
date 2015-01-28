@@ -2,11 +2,11 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package problem002
+package euler
 
-// Solution for finding the sum of the even-valued terms in the
-// Fibonacci sequence whose values do not exceed four million.
-func Solution() int {
+// Problem2 is solution for finding the sum of the even-valued terms
+// in the Fibonacci sequence whose values do not exceed four million.
+func Problem2() int {
 	sum := 0
 	// Every 3rd number is even, so:
 	// 1, 1, 2, 3, 5, 8, ...

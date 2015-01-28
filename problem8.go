@@ -2,18 +2,15 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package problem008
+package euler
 
-import (
-	"fmt"
-	"github.com/mrekucci/euler/util"
-)
+import "fmt"
 
-// Solution for finding the thirteen adjacent digits in
-// the 1000-digit number that have the greatest product.
-func Solution() (int, error) {
+// Problem8 is solution for finding the thirteen adjacent digits
+// in the 1000-digit number that have the greatest product.
+func Problem8() (int, error) {
 	const count = 13
-	const bigNum = "73167176531330624919225119674426574742355349194934" +
+	const big = "73167176531330624919225119674426574742355349194934" +
 		"96983520312774506326239578318016984801869478851843" +
 		"85861560789112949495459501737958331952853208805511" +
 		"12540698747158523863050715693290963295227443043557" +
@@ -35,12 +32,12 @@ func Solution() (int, error) {
 		"71636269561882670428252483600823257530420752963450"
 
 	gp := 0
-	adjDigs := make([]int, count)
-	for i, n := range bigNum {
-		adjDigs[i%count] = int(n - '0') // i%count is a ring buffer.
-		gpc, ok := util.MulInts(adjDigs)
+	ad := make([]int, count)
+	for i, n := range big {
+		ad[i%count] = int(n - '0') // i%count is a ring buffer.
+		gpc, ok := MulInts(ad)
 		if !ok {
-			return 0, fmt.Errorf("multiplication overflows on %d", adjDigs)
+			return 0, fmt.Errorf("multiplication overflows on %d", ad)
 		}
 		if gpc > gp {
 			gp = gpc

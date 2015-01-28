@@ -2,12 +2,12 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package problem003
+package euler
 
 import "math"
 
-// Solution for finding the largest prime factor of the number 600851475143.
-func Solution() int {
+// Problem3 is solution for finding the largest prime factor of the number 600851475143.
+func Problem3() int {
 	n := 600851475143
 	lf := 1
 

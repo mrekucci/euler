@@ -2,13 +2,13 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.
 
-package problem005
+package euler
 
 import "math"
 
-// Solution for finding the smallest positive number that
+// Problem5 is solution for finding the smallest positive number that
 // is evenly divisible by all of the numbers from 1 to 20.
-func Solution() int {
+func Problem5() int {
 	// The first solution:
 	//
 	// 	It is like finding the least common multiple of set 1-20:
@@ -22,13 +22,13 @@ func Solution() int {
 	var n float64 = 1
 	var k float64 = 20                              // The upper limit of the range.
 	primes := []float64{2, 3, 5, 7, 11, 13, 17, 19} // List of all primes from range 1-20.
-	// Represents limit where we only need to evaluate exponent, after this limit
+	// 'l' represents limit where we only need to evaluate exponent, after this limit
 	// exponent is equal 1. This solution is optimization only for case 1-20!
-	limit := math.Sqrt(k)
+	l := math.Sqrt(k)
 	for _, p := range primes {
 		var exp float64 = 1
 		// Note that exp=1 for p^2>k; this solution is optimization only for case 1-20!
-		if p <= limit {
+		if p <= l {
 			// p^exp=k; after logarithmic both sides we get: exp*log(p)=log(k).
 			// From which we get: exp=log(k)/log(prime); because the p^exp<=k
 			// the exponent must be floor to integer.
