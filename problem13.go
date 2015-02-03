@@ -117,12 +117,12 @@ func Problem13() (int, error) {
 
 	sum := big.NewInt(0)
 	for _, s := range nums {
-		bi := big.NewInt(0)
-		_, ok := bi.SetString(s, 10)
+		n := big.NewInt(0)
+		_, ok := n.SetString(s, 10)
 		if !ok {
 			return 0, fmt.Errorf("couldn't interpret string %#v as integer\n", s)
 		}
-		sum = sum.Add(sum, bi)
+		sum = sum.Add(sum, n)
 	}
 
 	return strconv.Atoi(fmt.Sprintf("%.10s", sum.String()))

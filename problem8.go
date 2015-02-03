@@ -9,8 +9,8 @@ import "fmt"
 // Problem8 is solution for finding the thirteen adjacent digits
 // in the 1000-digit number that have the greatest product.
 func Problem8() (int, error) {
-	const count = 13
-	const big = "73167176531330624919225119674426574742355349194934" +
+	const cnt = 13
+	const num = "73167176531330624919225119674426574742355349194934" +
 		"96983520312774506326239578318016984801869478851843" +
 		"85861560789112949495459501737958331952853208805511" +
 		"12540698747158523863050715693290963295227443043557" +
@@ -32,9 +32,9 @@ func Problem8() (int, error) {
 		"71636269561882670428252483600823257530420752963450"
 
 	gp := 0
-	ad := make([]int, count)
-	for i, n := range big {
-		ad[i%count] = int(n - '0') // i%count is a ring buffer.
+	ad := make([]int, cnt)
+	for i, d := range num {
+		ad[i%cnt] = int(d - '0') // i%cnt is a ring buffer.
 		gpc, ok := MulInts(ad)
 		if !ok {
 			return 0, fmt.Errorf("multiplication overflows on %d", ad)

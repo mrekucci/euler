@@ -12,26 +12,26 @@ func Problem15() int {
 	// the order does not matter? Solution is computed with help of Binomial
 	// Coefficient: 40!/((40-20)!*20!); (combination without repetition).
 	//
-	//	const gridSize = 20
-	//	return int(big.NewInt(0).Binomial(2*gridSize, gridSize).Int64())
+	//	const dim = 20
+	//	return int(big.NewInt(0).Binomial(2*dim, dim).Int64())
 	//
 
 	// Second solution based on dynamic programming.
 	// It's faster but memory less efficient then the previous one.
-	const gridSize = 20
+	const dim = 20
 	// +1 'cause inside the grid is number of ways to get from previous to next point.
-	var grid [gridSize + 1][gridSize + 1]int
+	var grid [dim + 1][dim + 1]int
 
 	// From previous point to next right point there
 	// is one way and so is to next down point.
-	for i := 0; i < gridSize; i++ {
-		grid[i][gridSize] = 1
-		grid[gridSize][i] = 1
+	for i := 0; i < dim; i++ {
+		grid[i][dim] = 1
+		grid[dim][i] = 1
 	}
 
 	// We count the number of ways backwards, from bottomRight up to topLeft.
-	for x := gridSize - 1; x >= 0; x-- {
-		for y := gridSize - 1; y >= 0; y-- {
+	for x := dim - 1; x >= 0; x-- {
+		for y := dim - 1; y >= 0; y-- {
 			grid[x][y] = grid[x+1][y] + grid[x][y+1]
 		}
 	}

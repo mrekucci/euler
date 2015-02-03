@@ -11,13 +11,13 @@ func Problem14() int {
 	max := 0
 	for i := 1; i < 1e6; i++ {
 		n := collatz(i)
-		count := 1
+		cnt := 1
 		for n != 1 {
 			n = collatz(n)
-			count++
+			cnt++
 		}
-		if count > max {
-			max = count
+		if cnt > max {
+			max = cnt
 			sn = i
 		}
 	}
