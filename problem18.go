@@ -27,7 +27,7 @@ func Problem18() int {
 		{04, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 04, 23},
 	}
 
-	// Next solution is base on dynamic programming.
+	// Next solution is based on dynamic programming.
 	for x := len(triangle) - 1; x > 0; x-- {
 		for y := 0; y < len(triangle[x])-1; y++ {
 			triangle[x-1][y] += math.Max(triangle[x][y], triangle[x][y+1])
