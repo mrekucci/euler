@@ -37,7 +37,7 @@ func Problem8() (int, error) {
 		ad[i%cnt] = int(d - '0') // i%cnt is a ring buffer.
 		gpc, ok := MulInts(ad)
 		if !ok {
-			return 0, fmt.Errorf("multiplication overflows on %d", ad)
+			return 0, fmt.Errorf("multiplication overflows on %d\n", ad)
 		}
 		if gpc > gp {
 			gp = gpc
