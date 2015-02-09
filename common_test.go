@@ -102,6 +102,29 @@ func TestMulInts(t *testing.T) {
 	}
 }
 
+var propDivSumTests = []struct {
+	in  int
+	out int
+}{
+	{0, 0},
+	{1, 0},
+	{4, 3},
+	{16, 15},
+	{220, 284},
+	{284, 220},
+	{8262136, 8369864},
+	{18655744, 19154336},
+}
+
+func TestPropDivSum(t *testing.T) {
+	for _, tt := range propDivSumTests {
+		got := PropDivSum(tt.in)
+		if got != tt.out {
+			t.Errorf("PropDivSum(%d) = %d; want %d", tt.in, got, tt.out)
+		}
+	}
+}
+
 func BenchmarkIsPrime(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		IsPrime(i)
@@ -119,5 +142,11 @@ func BenchmarkMulInts(b *testing.B) {
 func BenchmarkMul(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Mul(i, i)
+	}
+}
+
+func BenchmarkPropDivSum(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		PropDivSum(i)
 	}
 }
