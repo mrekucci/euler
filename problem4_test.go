@@ -7,7 +7,7 @@ package euler
 import "testing"
 
 func TestProblem4(t *testing.T) {
-	want := 906609
+	const want = 906609
 	got := Problem4()
 	if got != want {
 		t.Errorf("Problem4() = %d; want %d", got, want)

@@ -43,10 +43,9 @@ func TestIsPrime(t *testing.T) {
 }
 
 var mulTests = []struct {
-	a   int
-	b   int
-	out int
-	ok  bool
+	a, b int
+	out  int
+	ok   bool
 }{
 	{MinInt, 0, 0, true},
 	{0, MinInt, 0, true},
@@ -62,6 +61,7 @@ var mulTests = []struct {
 	{2, MinInt, 0, false},
 	{-2, MinInt, 0, false},
 	{-1, MinInt, 0, false},
+	{MaxInt >> 1, 3, 0, false},
 }
 
 func TestMul(t *testing.T) {
@@ -85,6 +85,7 @@ var mulIntsTests = []struct {
 	{[]int{2, 3, 4}, 24, true},
 	{[]int{3, 4, 5}, 60, true},
 	{[]int{4, 5, 6}, 120, true},
+	{[]int(nil), 0, true},
 	{[]int{MinInt, 2}, 0, false},
 	{[]int{MinInt, -2}, 0, false},
 	{[]int{MinInt, -1}, 0, false},

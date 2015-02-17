@@ -10,7 +10,7 @@ import (
 )
 
 func TestProblem20(t *testing.T) {
-	want := 648
+	const want = 648
 	got := Problem20()
 	if got != want {
 		t.Errorf("Problem20() = %d; want %d", got, want)
