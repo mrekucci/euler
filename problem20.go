@@ -21,25 +21,25 @@ func Problem20() int {
 
 	// Second solution using custom factorial function is a bit faster:
 	sum := 0
-	for _, d := range factorial(big.NewInt(100)).String() {
+	for _, d := range bigIntFactorial(big.NewInt(100)).String() {
 		sum += int(d - '0')
 	}
 	return sum
 }
 
-// factorial computes factorial of number n.
+// bigIntFactorial computes factorial of number n.
 // This version is memory less expensive and
 // faster like its next recursive version:
 //
-//	func factorial(n *big.Int) *big.Int {
+//	func bigIntFactorial(n *big.Int) *big.Int {
 // 		if n.Cmp(one) == 1 {
 // 			// new(big.Int) 'cause we will modify 'n' which is a *big.Int.
-// 			return n.Mul(n, factorial(new(big.Int).Sub(n, one)))
+// 			return n.Mul(n, bigIntFactorial(new(big.Int).Sub(n, one)))
 // 		}
 //		return one
 //	}
 //
-func factorial(n *big.Int) *big.Int {
+func bigIntFactorial(n *big.Int) *big.Int {
 	if n.Cmp(one) == 1 {
 		// new(big.Int) 'cause we will modify 'n' which is a *big.Int.
 		cn := new(big.Int).Set(n)

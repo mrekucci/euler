@@ -17,7 +17,7 @@ func TestProblem20(t *testing.T) {
 	}
 }
 
-var factorialTests = []struct {
+var bigIntFactorialTests = []struct {
 	in  int64
 	out int64
 }{
@@ -29,11 +29,11 @@ var factorialTests = []struct {
 	{5, 120},
 }
 
-func TestFactorial(t *testing.T) {
-	for _, tt := range factorialTests {
-		got := factorial(big.NewInt(tt.in))
+func TestBigIntFactorial(t *testing.T) {
+	for _, tt := range bigIntFactorialTests {
+		got := bigIntFactorial(big.NewInt(tt.in))
 		if got.Cmp(big.NewInt(tt.out)) != 0 {
-			t.Errorf("factorial(%d) = %v; want %d", tt.in, got, tt.out)
+			t.Errorf("bigIntFactorial(%d) = %v; want %d", tt.in, got, tt.out)
 		}
 	}
 }
