@@ -15,8 +15,8 @@ func TestProblem24(t *testing.T) {
 }
 
 var factorialTests = []struct {
-	in  int
-	out int
+	in   int
+	want int
 }{
 	{0, 1},
 	{1, 1},
@@ -29,8 +29,8 @@ var factorialTests = []struct {
 func TestFactorial(t *testing.T) {
 	for _, tt := range factorialTests {
 		got := factorial(tt.in)
-		if got != tt.out {
-			t.Errorf("factorial(%d) = %v; want %d", tt.in, got, tt.out)
+		if got != tt.want {
+			t.Errorf("factorial(%d) = %v; want %d", tt.in, got, tt.want)
 		}
 	}
 }

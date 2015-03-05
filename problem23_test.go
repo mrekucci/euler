@@ -15,8 +15,8 @@ func TestProblem23(t *testing.T) {
 }
 
 var isAbundantTests = []struct {
-	in  int
-	out bool
+	in   int
+	want bool
 }{
 	{0, false},
 	{10, false},
@@ -31,8 +31,8 @@ var isAbundantTests = []struct {
 
 func TestIsAbundant(t *testing.T) {
 	for _, tt := range isAbundantTests {
-		if isAbundant(tt.in) != tt.out {
-			t.Errorf("isAbundant(%d) = %t; want %t", tt.in, !tt.out, tt.out)
+		if isAbundant(tt.in) != tt.want {
+			t.Errorf("isAbundant(%d) = %t; want %t", tt.in, !tt.want, tt.want)
 		}
 	}
 }

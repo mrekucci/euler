@@ -15,8 +15,8 @@ func TestProblem14(t *testing.T) {
 }
 
 var collatzTests = []struct {
-	in  int
-	out int
+	in   int
+	want int
 }{
 	{13, 40},
 	{40, 20},
@@ -31,8 +31,8 @@ var collatzTests = []struct {
 func TestCollatz(t *testing.T) {
 	for _, tt := range collatzTests {
 		got := collatz(tt.in)
-		if got != tt.out {
-			t.Errorf("collatz(%d) = %d; want %d", tt.in, got, tt.out)
+		if got != tt.want {
+			t.Errorf("collatz(%d) = %d; want %d", tt.in, got, tt.want)
 		}
 	}
 }

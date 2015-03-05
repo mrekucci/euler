@@ -16,7 +16,7 @@ func TestProblem1(t *testing.T) {
 
 var snTests = []struct {
 	d, an int
-	out   int
+	want  int
 }{
 	{1, 5, 15},
 	{2, 10, 30},
@@ -29,8 +29,8 @@ var snTests = []struct {
 func TestSn(t *testing.T) {
 	for _, tt := range snTests {
 		got := sn(tt.d, tt.an)
-		if got != tt.out {
-			t.Errorf("sn(%d, %d) = %d; want %d", tt.d, tt.an, got, tt.out)
+		if got != tt.want {
+			t.Errorf("sn(%d, %d) = %d; want %d", tt.d, tt.an, got, tt.want)
 		}
 	}
 }

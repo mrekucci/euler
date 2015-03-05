@@ -15,8 +15,8 @@ func TestProblem4(t *testing.T) {
 }
 
 var reverseTests = []struct {
-	in  int
-	out int
+	in   int
+	want int
 }{
 	{1111, 1111},
 	{1010, 101},
@@ -26,15 +26,15 @@ var reverseTests = []struct {
 func TestReverse(t *testing.T) {
 	for _, tt := range reverseTests {
 		got := reverse(tt.in)
-		if got != tt.out {
-			t.Errorf("reverse(%d) = %d; want %d", tt.in, got, tt.out)
+		if got != tt.want {
+			t.Errorf("reverse(%d) = %d; want %d", tt.in, got, tt.want)
 		}
 	}
 }
 
 var isPalindromeTests = []struct {
-	in  int
-	out bool
+	in   int
+	want bool
 }{
 	{101, true},
 	{1010, false},
@@ -45,8 +45,8 @@ var isPalindromeTests = []struct {
 func TestIsPalindrome(t *testing.T) {
 	for _, tt := range isPalindromeTests {
 		got := isPalindrome(tt.in)
-		if got != tt.out {
-			t.Errorf("isPalindrome(%d) = %t; want %t", tt.in, got, tt.out)
+		if got != tt.want {
+			t.Errorf("isPalindrome(%d) = %t; want %t", tt.in, got, tt.want)
 		}
 	}
 }

@@ -15,8 +15,8 @@ func TestProblem19(t *testing.T) {
 }
 
 var isLeapYearTests = []struct {
-	in  int
-	out bool
+	in   int
+	want bool
 }{
 	{1904, true},
 	{1910, false},
@@ -35,8 +35,8 @@ var isLeapYearTests = []struct {
 func TestIsLapYear(t *testing.T) {
 	for _, tt := range isLeapYearTests {
 		got := isLeapYear(tt.in)
-		if got != tt.out {
-			t.Errorf("isLeapYear(%d) = %t; want %t", tt.in, got, tt.out)
+		if got != tt.want {
+			t.Errorf("isLeapYear(%d) = %t; want %t", tt.in, got, tt.want)
 		}
 	}
 }

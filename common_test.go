@@ -7,8 +7,8 @@ package euler
 import "testing"
 
 var isPrimeTests = []struct {
-	in  int
-	out bool
+	in   int
+	want bool
 }{
 	{-4, false},
 	{-3, false},
@@ -36,15 +36,15 @@ var isPrimeTests = []struct {
 
 func TestIsPrime(t *testing.T) {
 	for _, tt := range isPrimeTests {
-		if IsPrime(tt.in) != tt.out {
-			t.Errorf("IsPrime(%d) = %t; want %t", tt.in, !tt.out, tt.out)
+		if IsPrime(tt.in) != tt.want {
+			t.Errorf("IsPrime(%d) = %t; want %t", tt.in, !tt.want, tt.want)
 		}
 	}
 }
 
 var mulTests = []struct {
 	a, b int
-	out  int
+	want int
 	ok   bool
 }{
 	{MinInt, 0, 0, true},
@@ -67,16 +67,16 @@ var mulTests = []struct {
 func TestMul(t *testing.T) {
 	for _, tt := range mulTests {
 		got, ok := Mul(tt.a, tt.b)
-		if got != tt.out || ok != tt.ok {
-			t.Errorf("Mul(%d, %d) = %d, %t; want %d, %t", tt.a, tt.b, got, ok, tt.out, tt.ok)
+		if got != tt.want || ok != tt.ok {
+			t.Errorf("Mul(%d, %d) = %d, %t; want %d, %t", tt.a, tt.b, got, ok, tt.want, tt.ok)
 		}
 	}
 }
 
 var mulIntsTests = []struct {
-	in  []int
-	out int
-	ok  bool
+	in   []int
+	want int
+	ok   bool
 }{
 	{[]int{-2, 3, 4}, -24, true},
 	{[]int{-3, -4, 5}, 60, true},
@@ -97,15 +97,15 @@ var mulIntsTests = []struct {
 func TestMulInts(t *testing.T) {
 	for _, tt := range mulIntsTests {
 		got, ok := MulInts(tt.in)
-		if got != tt.out || ok != tt.ok {
-			t.Errorf("MulInts(%d) = %d, %t; want %d, %t", tt.in, got, ok, tt.out, tt.ok)
+		if got != tt.want || ok != tt.ok {
+			t.Errorf("MulInts(%d) = %d, %t; want %d, %t", tt.in, got, ok, tt.want, tt.ok)
 		}
 	}
 }
 
 var propDivSumTests = []struct {
-	in  int
-	out int
+	in   int
+	want int
 }{
 	{0, 0},
 	{1, 0},
@@ -120,8 +120,8 @@ var propDivSumTests = []struct {
 func TestPropDivSum(t *testing.T) {
 	for _, tt := range propDivSumTests {
 		got := PropDivSum(tt.in)
-		if got != tt.out {
-			t.Errorf("PropDivSum(%d) = %d; want %d", tt.in, got, tt.out)
+		if got != tt.want {
+			t.Errorf("PropDivSum(%d) = %d; want %d", tt.in, got, tt.want)
 		}
 	}
 }

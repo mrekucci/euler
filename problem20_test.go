@@ -18,8 +18,8 @@ func TestProblem20(t *testing.T) {
 }
 
 var bigIntFactorialTests = []struct {
-	in  int64
-	out int64
+	in   int64
+	want int64
 }{
 	{0, 1},
 	{1, 1},
@@ -32,8 +32,8 @@ var bigIntFactorialTests = []struct {
 func TestBigIntFactorial(t *testing.T) {
 	for _, tt := range bigIntFactorialTests {
 		got := bigIntFactorial(big.NewInt(tt.in))
-		if got.Cmp(big.NewInt(tt.out)) != 0 {
-			t.Errorf("bigIntFactorial(%d) = %v; want %d", tt.in, got, tt.out)
+		if got.Cmp(big.NewInt(tt.want)) != 0 {
+			t.Errorf("bigIntFactorial(%d) = %v; want %d", tt.in, got, tt.want)
 		}
 	}
 }

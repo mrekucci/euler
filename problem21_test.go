@@ -15,8 +15,8 @@ func TestProblem21(t *testing.T) {
 }
 
 var isAmicableTests = []struct {
-	in  int
-	out bool
+	in   int
+	want bool
 }{
 	{1, false},
 	{220, true},
@@ -31,8 +31,8 @@ var isAmicableTests = []struct {
 
 func TestIsAmicable(t *testing.T) {
 	for _, tt := range isAmicableTests {
-		if isAmicable(tt.in) != tt.out {
-			t.Errorf("isAmicable(%d) = %t; want %t", tt.in, !tt.out, tt.out)
+		if isAmicable(tt.in) != tt.want {
+			t.Errorf("isAmicable(%d) = %t; want %t", tt.in, !tt.want, tt.want)
 		}
 	}
 }
