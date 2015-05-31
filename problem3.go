@@ -4,8 +4,6 @@
 
 package euler
 
-import "math"
-
 // Problem3 is solution for finding the largest prime factor of the number 600851475143.
 func Problem3() int {
 	n := 600851475143
@@ -21,17 +19,15 @@ func Problem3() int {
 		}
 	}
 
-	mf := int(math.Sqrt(float64(n)))
-	// Any number 'n' can have only one prime factor greater than sqrt of 'n'.
-	// If 'n' is prime, so that prime factor is 'n' by its self.
-	for f := 3; n > 1 && f <= mf; f += 2 {
+	// We check f*f <= n 'cause any number 'n' can have only one prime factor greater
+	// than sqrt of 'n'. If 'n' is prime, so that prime factor is 'n' by its self.
+	for f := 3; n > 1 && f*f <= n; f += 2 {
 		if n%f == 0 {
 			lf = f
 			n /= f
 			for n%f == 0 { // Divide out all the same factors from 'n'.
 				n /= f
 			}
-			mf = int(math.Sqrt(float64(n)))
 		}
 	}
 

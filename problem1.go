@@ -10,7 +10,9 @@ func Problem1() int {
 }
 
 // sn returns the sum of arithmetic sequence from 0 up to the an with difference d.
-func sn(d, an int) int {
-	n := an / d
-	return int(float64(n) / 2 * float64((2*d)+(n-1)*d))
+func sn(d, an float64) int {
+	// 'n' computation and truncation (faster then math.Trunc).
+	// We truncate an / d 'cause we need an integer to perform correct computation.
+	n := float64(int(an / d))
+	return int(n / 2 * ((2 * d) + (n-1)*d))
 }

@@ -4,12 +4,10 @@
 
 package euler
 
-import "math"
-
 // Problem18 is solution for finding the maximum
 // total from top to bottom of the triangle.
 func Problem18() int {
-	triangle := [][]float64{
+	triangle := [][]int{
 		{75},
 		{95, 64},
 		{17, 47, 82},
@@ -30,7 +28,7 @@ func Problem18() int {
 	// Next solution is based on dynamic programming.
 	for x := len(triangle) - 1; x > 0; x-- {
 		for y := 0; y < len(triangle[x])-1; y++ {
-			triangle[x-1][y] += math.Max(triangle[x][y], triangle[x][y+1])
+			triangle[x-1][y] += Max(triangle[x][y], triangle[x][y+1])
 		}
 	}
 	return int(triangle[0][0])

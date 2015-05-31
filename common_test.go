@@ -6,6 +6,52 @@ package euler
 
 import "testing"
 
+var minTests = []struct {
+	x, y int
+	want int
+}{
+	{0, 1, 0},
+	{1, 0, 0},
+	{1, 1, 1},
+	{MaxInt, 0, 0},
+	{0, MaxInt, 0},
+	{MinInt, 0, MinInt},
+	{0, MinInt, MinInt},
+	{MaxInt, MinInt, MinInt},
+	{MinInt, MaxInt, MinInt},
+}
+
+func TestMin(t *testing.T) {
+	for _, tt := range minTests {
+		if got := Min(tt.x, tt.y); got != tt.want {
+			t.Errorf("Min(%d, %d) = %d; want %d", tt.x, tt.y, got, tt.want)
+		}
+	}
+}
+
+var maxTests = []struct {
+	x, y int
+	want int
+}{
+	{0, 1, 1},
+	{1, 0, 1},
+	{1, 1, 1},
+	{MinInt, 0, 0},
+	{0, MinInt, 0},
+	{MaxInt, 0, MaxInt},
+	{0, MaxInt, MaxInt},
+	{MaxInt, MinInt, MaxInt},
+	{MinInt, MaxInt, MaxInt},
+}
+
+func TestMax(t *testing.T) {
+	for _, tt := range maxTests {
+		if got := Max(tt.x, tt.y); got != tt.want {
+			t.Errorf("Max(%d, %d) = %d; want %d", tt.x, tt.y, got, tt.want)
+		}
+	}
+}
+
 var isPrimeTests = []struct {
 	in   int
 	want bool
@@ -123,6 +169,18 @@ func TestPropDivSum(t *testing.T) {
 		if got != tt.want {
 			t.Errorf("PropDivSum(%d) = %d; want %d", tt.in, got, tt.want)
 		}
+	}
+}
+
+func BenchmarkMin(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Min(10, 3)
+	}
+}
+
+func BenchmarkMax(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Max(10, 3)
 	}
 }
 

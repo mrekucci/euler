@@ -4,13 +4,27 @@
 
 package euler
 
-import "math"
-
 // Integer limit values.
 const (
 	MaxInt = int(^uint(0) >> 1)
 	MinInt = -MaxInt - 1
 )
+
+// Min returns the smaller of x or y.
+func Min(x, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
+
+// Max returns the larger of x or y.
+func Max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
 
 // IsPrime returns true if number n is a prime number.
 func IsPrime(n int) bool {
@@ -27,15 +41,15 @@ func IsPrime(n int) bool {
 		return false
 	}
 
-	// Any number 'n' can have only one prime factor greater than sqrt of 'n'.
-	// And if 'n' is prime, so that prime factor is 'n' by its self.
-	l := int(math.Sqrt(float64(n)))
-	// Here we start with 5 because all primes greater than 3 can be written
+	// We go up to the p*p <= n 'cause any number 'n' can have only one prime factor greater
+	// than sqrt of 'n'. And if 'n' is prime, so that prime factor is 'n' by its self.
+	//
+	// Also we start with 5 because all primes greater than 3 can be written
 	// in the form: (6k-/+1). So for: k=1 is (6k-1) equal 5.
 	// Prime for next k-th prime is computed by: p+=6 'cause we started with (6k-1) for k=1.
 	// WARNING: the series (6k-/+1) contains all primes but
 	// not all numbers in this series are prime (e.g: for k=4 (6k+1) is not)!
-	for p := 5; p <= l; p += 6 {
+	for p := 5; p*p <= n; p += 6 {
 		if n%p == 0 { // We check here for (6k-1).
 			return false
 		}
@@ -117,10 +131,9 @@ func PropDivSum(n int) int {
 		sum *= (pa - 1) // (p^(a+1) - 1) / (p - 1) where p=2.
 	}
 
-	mf := int(math.Sqrt(float64(n)))
-	// Any number 'n' can have only one prime factor greater than sqrt of 'n'.
-	// If 'n' is prime, so that prime factor is 'n' by its self.
-	for p := 3; n > 1 && p <= mf; p += 2 {
+	// We check p*p <= n 'cause any number 'n' can have only one prime factor greater
+	// than sqrt of 'n'. If 'n' is prime, so that prime factor is 'n' by its self.
+	for p := 3; n > 1 && p*p <= n; p += 2 {
 		if n%p == 0 {
 			pa := p * p
 			n /= p
