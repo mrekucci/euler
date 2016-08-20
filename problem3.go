@@ -6,33 +6,31 @@ package euler
 
 // Problem3 is solution for finding the largest prime factor of the number 600851475143.
 func Problem3() int {
-	n := 600851475143
-	lf := 1
+	n, lf := 600851475143, 1
 
-	// Because 2 is the only even prime, we can treat it
-	// separately and then increase 'f' with 2 on every step.
-	if n%2 == 0 {
-		lf = 2
-		n /= 2
-		for n%2 == 0 { // Divide out all 2 from 'n'.
-			n /= 2
-		}
-	}
-
-	// We check f*f <= n 'cause any number 'n' can have only one prime factor greater
-	// than sqrt of 'n'. If 'n' is prime, so that prime factor is 'n' by its self.
-	for f := 3; n > 1 && f*f <= n; f += 2 {
+	// factorOut factors out all the same factors f from n if n%f==0, and sets lf to f.
+	factorOut := func(f int) {
 		if n%f == 0 {
 			lf = f
 			n /= f
-			for n%f == 0 { // Divide out all the same factors from 'n'.
+			for n%f == 0 {
 				n /= f
 			}
 		}
 	}
 
-	// If 'f' exceeds sqrt of 'n' we know the remaining number 'n' is
-	// prime, because we've divided out all multiples 1..f from 'n'.
+	// Because 2 is the only even prime, we can treat it
+	// separately and then increase f with 2 on every step.
+	factorOut(2)
+
+	// We check f*f <= n because any number n can have only one prime factor greater
+	// than sqrt(n). If n is prime, so that prime factor is n by its self.
+	for f := 3; n > 1 && f*f <= n; f += 2 {
+		factorOut(f)
+	}
+
+	// If f exceeds sqrt(n) we know the remaining number n is a
+	// prime, because we've factored out all multiples 1..f from n.
 	if n != 1 {
 		return n
 	}
