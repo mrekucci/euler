@@ -35,14 +35,14 @@ func Problem11() int {
 	gp := 0
 
 	for y := 0; y < dim; y++ {
-		for x := 0; x < dim-win; x++ {
+		for x := 0; x <= dim-win; x++ {
 			gp = Max(grid[y][x]*grid[y][x+1]*grid[y][x+2]*grid[y][x+3], gp) // left => right
 			gp = Max(grid[x][y]*grid[x+1][y]*grid[x+2][y]*grid[x+3][y], gp) // up => down
 		}
 	}
 
 	for j := 0; j < dim-win; j++ {
-		for i := 0; i < dim-win; i++ {
+		for i := 0; i <= dim-win; i++ {
 			gp = Max(grid[j][i]*grid[j+1][i+1]*grid[j+2][i+2]*grid[j+3][i+3], gp)   // diagonal leftTop => rightDown
 			gp = Max(grid[j+3][i]*grid[j+2][i+1]*grid[j+1][i+2]*grid[j+0][i+3], gp) // diagonal leftDown => rightUp
 
